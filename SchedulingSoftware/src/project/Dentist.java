@@ -15,23 +15,22 @@ public class Dentist {
 		this.breakTimeStarts = breakTimeStarts;
 		this.breakTimeEnds = breakTimeEnds;
 	}
-	
+
 //Methods
 	public boolean isAvaliable(LocalTime newTime) {
-		if(LocalTime.now().isAfter(breakTimeStarts) && LocalTime.now().isBefore(breakTimeEnds)){
-			
+		if (LocalTime.now().isAfter(breakTimeStarts) && LocalTime.now().isBefore(breakTimeEnds)) {
+			return false;
 		}
-		
-		return false;
+
+		return true;
 	}
 
-	
 	public Schedule getSchedule() {
 		return this.schedule;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 }

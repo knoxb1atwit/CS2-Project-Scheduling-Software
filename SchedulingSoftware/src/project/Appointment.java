@@ -8,17 +8,16 @@ public class Appointment {
 	private int appointmentId;
 	private LocalDate date;
 	private LocalTime startTime;
-	private int duration;
 	private Client client;
 	private Dentist dentist;
 	private AppointmentType type;
 
 //constructors
-	public Appointment(int appointmentId, LocalDate date, LocalTime startTime, int duration) {
+	public Appointment(int appointmentId, LocalDate date, LocalTime startTime, AppointmentType type) {
 		this.appointmentId = appointmentId;
 		this.date = date;
 		this.startTime = startTime;
-		this.duration = duration;
+		this.type = type;
 	}
 
 //methods
