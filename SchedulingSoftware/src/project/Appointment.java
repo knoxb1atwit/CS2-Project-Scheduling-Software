@@ -5,7 +5,6 @@ import java.time.LocalDate;
 
 public class Appointment {
 //attributes
-	private int appointmentId;
 	private LocalDate date;
 	private LocalTime startTime;
 	private Client client;
@@ -13,21 +12,32 @@ public class Appointment {
 	private AppointmentType type;
 
 //constructors
-	public Appointment(int appointmentId, LocalDate date, LocalTime startTime, AppointmentType type) {
-		this.appointmentId = appointmentId;
+	public Appointment(LocalDate date, LocalTime startTime, AppointmentType type) {
 		this.date = date;
 		this.startTime = startTime;
 		this.type = type;
 	}
 
+	public LocalDate getDate(LocalDate date) {
+		return this.date;
+	}
+	
+	public LocalTime getStartTime() {
+		return this.startTime;
+	}
+	
+	public AppointmentType getType() {
+		return this.type;
+	}
+	
+	public Client getClient() {
+		return this.client;
+	}
+	
+	public Dentist getDentist() {
+		return this.dentist;
+	}
 //methods
-	public void confirmAppointment() {
-
-	}
-
-	public void cancelAppointment() {
-
-	}
 
 	public void rescheduleAppointment(LocalDate newDate, LocalTime newTime ) {
 		this.date = newDate;
@@ -35,7 +45,7 @@ public class Appointment {
 	}
 
 	public String getDetails() {
-		return "";
+		return "Appointment on " + date + " at " + startTime + " ( " + type + " ) ";
 	}
 
 }

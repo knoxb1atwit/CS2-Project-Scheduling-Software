@@ -11,6 +11,14 @@ public class AppointmentType {
 		this.appointmentName = appointmentName;
 		this.duration = duration;
 	}
+	
+	public String getAppointmentName() {
+		return this.appointmentName;
+	}
+	
+	public Integer getDuration() {
+		return this.duration;
+	}
 //Methods
 	public int getDuration(int time) {
 		if (time == 1) {

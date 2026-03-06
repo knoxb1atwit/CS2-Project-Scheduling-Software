@@ -16,6 +16,21 @@ public class Dentist {
 		this.breakTimeEnds = breakTimeEnds;
 	}
 
+	public String getName() {
+		return this.name;
+	}
+	
+	public LocalTime getBreakTimeStart() {
+		return this.breakTimeStarts;
+	}
+	
+	public LocalTime getBreakTimeEnds() {
+		return this.breakTimeEnds;
+	}
+	
+	public Schedule getSchedule() {
+		return this.schedule;
+	}
 //Methods
 	public boolean isAvaliable(LocalTime newTime) {
 		if (LocalTime.now().isAfter(breakTimeStarts) && LocalTime.now().isBefore(breakTimeEnds)) {
@@ -24,13 +39,4 @@ public class Dentist {
 
 		return true;
 	}
-
-	public Schedule getSchedule() {
-		return this.schedule;
-	}
-
-	public String getName() {
-		return name;
-	}
-
 }

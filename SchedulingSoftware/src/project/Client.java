@@ -14,13 +14,25 @@ public class Client {
 		this.prefferedDentist = prefferedDentist;
 	}
 	
+	public String getName() {
+		return this.name;
+	}
+	
+	public String getPhoneNumber() {
+		return this.phoneNumber;
+	}
+	
+	public Dentist getPrefferedDentists() {
+		return this.prefferedDentist;
+	}
+	
 //methods
 	public void updatePhoneNumber(String newPhoneNumber) {
 		phoneNumber.equals(newPhoneNumber);
 	}
 
 	public void setPrefferedDentist(Dentist d) {
-		d= prefferedDentist;
+		prefferedDentist=d;
 	}
 
 	public String getClientInfo() {
