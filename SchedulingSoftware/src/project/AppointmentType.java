@@ -29,7 +29,7 @@ public class AppointmentType {
 		return duration;
 	}
 
-	public String getAppointmentName() {
+	public String setAppointmentName() {
 		if (duration == 1) {
 			return "Tooth Cleaning";
 		}
