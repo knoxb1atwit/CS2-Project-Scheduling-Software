@@ -18,7 +18,7 @@ public class Appointment {
 		this.type = type;
 	}
 
-	public LocalDate getDate(LocalDate date) {
+	public LocalDate getDate() {
 		return this.date;
 	}
 	
