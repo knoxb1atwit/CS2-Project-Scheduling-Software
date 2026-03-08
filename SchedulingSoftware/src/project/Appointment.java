@@ -12,9 +12,11 @@ public class Appointment {
 	private AppointmentType type;
 
 //constructors
-	public Appointment(LocalDate date, LocalTime startTime, AppointmentType type) {
+	public Appointment(LocalDate date, LocalTime startTime, Client client, Dentist dentist, AppointmentType type) {
 		this.date = date;
 		this.startTime = startTime;
+		this.client = client;
+		this.dentist=dentist;
 		this.type = type;
 	}
 

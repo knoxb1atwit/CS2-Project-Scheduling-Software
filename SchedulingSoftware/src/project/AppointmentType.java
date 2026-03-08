@@ -1,5 +1,6 @@
 package project;
 
+
 public class AppointmentType {
 //attributes
 	private String appointmentName;
