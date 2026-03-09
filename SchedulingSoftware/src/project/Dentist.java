@@ -19,24 +19,26 @@ public class Dentist {
 	public String getName() {
 		return this.name;
 	}
-	
+
 	public LocalTime getBreakTimeStart() {
 		return this.breakTimeStarts;
 	}
-	
+
 	public LocalTime getBreakTimeEnds() {
 		return this.breakTimeEnds;
 	}
-	
+
 	public Schedule getSchedule() {
 		return this.schedule;
 	}
+
 //Methods
-	public boolean isAvaliable(LocalTime newTime) {
-		if (LocalTime.now().isAfter(breakTimeStarts) && LocalTime.now().isBefore(breakTimeEnds)) {
+	public boolean isAvailable(LocalTime startTime, int duration) {
+		LocalTime endTime = startTime.plusMinutes(duration);
+		boolean overlap = startTime.isBefore(breakTimeEnds) && endTime.isAfter(breakTimeStarts);
+		if (overlap) {
 			return false;
 		}
-
 		return true;
 	}
 }
