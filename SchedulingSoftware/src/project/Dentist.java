@@ -10,10 +10,11 @@ public class Dentist {
 	private Schedule schedule;
 
 //Constructors
-	public Dentist(String name, LocalTime breakTimeStarts, LocalTime breakTimeEnds) {
+	public Dentist(String name, LocalTime breakTimeStarts, LocalTime breakTimeEnds, Schedule schedule) {
 		this.name = name;
 		this.breakTimeStarts = breakTimeStarts;
 		this.breakTimeEnds = breakTimeEnds;
+		this.schedule = schedule;
 	}
 
 	public String getName() {

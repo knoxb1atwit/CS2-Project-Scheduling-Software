@@ -48,8 +48,24 @@ public class Schedule {
 		return true;
 	}
 
-	public void addAppointment(Appointment a) {
-		appointments.add(a);
+	public boolean addAppointment(Appointment a) {
+		LocalDateTime dateTime = LocalDateTime.of(a.getDate(), a.getStartTime());
+	    int duration = a.getType().getDuration();
+
+	    // Check schedule conflicts
+	    if (!checkAvailability(dateTime, duration)) {
+	        return false;
+	    }
+
+	    // Check dentist availability (if dentist exists)
+	    if (a.getDentist() != null) {
+	        if (!a.getDentist().isAvailable(a.getStartTime(), duration)) {
+	            return false;
+	        }
+	    }
+
+	    appointments.add(a);
+	    return true;
 	}
 
 	public void removeAppointment(Appointment a) {
