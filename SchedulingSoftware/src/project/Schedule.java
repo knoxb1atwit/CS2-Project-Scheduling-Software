@@ -22,30 +22,29 @@ public class Schedule {
 
 //Methods
 	
-	public boolean checkAvailability(LocalDateTime dateTime, int duration) {
-		LocalTime start = dateTime.toLocalTime();
-		LocalTime end = start.plusMinutes(duration);
+	public String checkAvailability(LocalDate date, LocalTime startTime, int duration) {
+		// Must start on the hour
+		if (startTime.getMinute() != 0) {
+	        return "Appointments must start on the hour (e.g. 9:00, 10:00).";
+	    }
+		LocalTime endTime = startTime.plusMinutes(duration);
 
-		// Check working hours
-		if (start.isBefore(workingHoursStart) || end.isAfter(workingHoursEnd)) {
-			return false;
-		}
+	    if (startTime.isBefore(workingHoursStart) || endTime.isAfter(workingHoursEnd)) {
+	        return "Time is outside office hours (" + workingHoursStart + " - " + workingHoursEnd + ").";
+	    }
 
-		//Check for conflicts with other appointments
-		for (Appointment a : appointments) {
-			if (a.getDate().equals(dateTime.toLocalDate())) {
-				LocalTime existingStart = a.getStartTime();
-				LocalTime existingEnd = existingStart.plusMinutes(a.getType().getDuration());
+	    for (Appointment a : appointments) {
+	        if (a.getDate().equals(date)) {
+	            LocalTime existingStart = a.getStartTime();
+	            LocalTime existingEnd   = existingStart.plusMinutes(a.getType().getDuration());
+	            boolean overlap = startTime.isBefore(existingEnd) && endTime.isAfter(existingStart);
+	            if (overlap) {
+	                return "Time conflicts with an existing appointment at " + existingStart + ".";
+	            }
+	        }
+	    }
 
-				boolean overlap = start.isBefore(existingEnd) && end.isAfter(existingStart);
-
-				if (overlap) {
-					return false;
-				}
-			}
-		}
-
-		return true;
+	    return null; // available
 	}
 
 	public boolean addAppointment(Appointment a) {

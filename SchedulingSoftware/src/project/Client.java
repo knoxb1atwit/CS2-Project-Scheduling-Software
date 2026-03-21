@@ -37,4 +37,8 @@ public class Client {
 	public String getClientInfo() {
 		return String.format("%s%n%s%n%s", name, phoneNumber, prefferedDentist.getName());
 	}
+	
+	public String toString() {
+	    return name;
+	}
 }
