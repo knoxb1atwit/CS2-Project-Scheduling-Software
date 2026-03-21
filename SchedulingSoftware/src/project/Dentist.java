@@ -35,13 +35,12 @@ public class Dentist {
 
 //Methods
 	public boolean isAvailable(LocalTime startTime, int duration) {
-		public boolean isAvailable(LocalTime startTime, int duration) {
-		    LocalTime endTime = startTime.plusMinutes(duration);
-		    boolean overlap = startTime.isBefore(breakTimeEnds) && endTime.isAfter(breakTimeStarts);
-		    return !overlap;
-		}
-	
+		LocalTime endTime = startTime.plusMinutes(duration);
+		boolean overlap = startTime.isBefore(breakTimeEnds) && endTime.isAfter(breakTimeStarts);
+		return !overlap;
+	}
+
 	public String toString() {
-	    return name;
+		return name;
 	}
 }
