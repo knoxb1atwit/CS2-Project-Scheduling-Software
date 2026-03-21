@@ -12,11 +12,6 @@ public class Appointment {
 	private AppointmentType type;
 
 //constructors
-	public Appointment(LocalDate date, LocalTime startTime, AppointmentType type) {
-		this.date = date;
-		this.startTime = startTime;
-		this.type = type;
-	}
 
 	public Appointment(LocalDate date, LocalTime startTime, Client client, Dentist dentist, AppointmentType type) {
 		this.date = date;
@@ -34,6 +29,10 @@ public class Appointment {
 		return this.startTime;
 	}
 
+	public LocalTime getEndTime() {
+	    return startTime.plusMinutes(type.getDuration());
+	}
+	
 	public AppointmentType getType() {
 		return this.type;
 	}
@@ -55,5 +54,7 @@ public class Appointment {
 	public String getDetails() {
 		return "Appointment on " + date + " at " + startTime + " ( " + type.getAppointmentName() + " ) ";
 	}
+	
+	
 
 }

@@ -1,7 +1,6 @@
 package project;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,24 +46,18 @@ public class Schedule {
 	    return null; // available
 	}
 
-	public boolean addAppointment(Appointment a) {
-		LocalDateTime dateTime = LocalDateTime.of(a.getDate(), a.getStartTime());
-	    int duration = a.getType().getDuration();
+	public String addAppointment(Appointment a) {
+	    String scheduleError = checkAvailability(a.getDate(), a.getStartTime(), a.getType().getDuration());
+	    if (scheduleError != null) return scheduleError;
 
-	    // Check schedule conflicts
-	    if (!checkAvailability(dateTime, duration)) {
-	        return false;
-	    }
-
-	    // Check dentist availability (if dentist exists)
 	    if (a.getDentist() != null) {
-	        if (!a.getDentist().isAvailable(a.getStartTime(), duration)) {
-	            return false;
+	        if (!a.getDentist().isAvailable(a.getStartTime(), a.getType().getDuration())) {
+	            return a.getDentist().getName() + " is on break at that time.";
 	        }
 	    }
 
 	    appointments.add(a);
-	    return true;
+	    return null;
 	}
 
 	public void removeAppointment(Appointment a) {
@@ -81,5 +74,29 @@ public class Schedule {
 		}
 
 		return result;
+	}
+	
+	public List<Appointment> getAppointmentsForWeek(LocalDate startDate) {
+	    List<Appointment> result = new ArrayList<>();
+	    for (int i = 0; i < 7; i++) {
+	        result.addAll(getAppointmentsForDay(startDate.plusDays(i)));
+	    }
+	    return result;
+	}
+
+	public List<Appointment> getAllAppointments() {
+	    return new ArrayList<>(appointments);
+	}
+
+	public List<LocalTime> getAvailableSlots(LocalDate date, Dentist dentist, int duration) {
+	    List<LocalTime> slots = new ArrayList<>();
+	    LocalTime cursor = workingHoursStart;
+	    while (!cursor.plusMinutes(duration).isAfter(workingHoursEnd)) {
+	        boolean scheduleOk = checkAvailability(date, cursor, duration) == null;
+	        boolean dentistOk  = (dentist == null) || dentist.isAvailable(cursor, duration);
+	        if (scheduleOk && dentistOk) slots.add(cursor);
+	        cursor = cursor.plusHours(1);
+	    }
+	    return slots;
 	}
 }
